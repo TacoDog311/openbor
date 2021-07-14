@@ -36404,7 +36404,8 @@ void savelevelinfo()
         save->pSpawnmp[i] = player[i].spawnmp;
         save->pWeapnum[i] = player[i].weapnum;
         save->pColourmap[i] = player[i].colourmap;
-        strncpy(save->pName[i], player[i].name, MAX_NAME_LEN);
+        int nlen = strlen(player[i].name+1);
+        strncpy(save->pName[i], player[i].name, nlen);
     }
     save->credits = credits;
     save->level = current_level;
@@ -36859,7 +36860,8 @@ int selectplayer(int *players, char *filename, int useSavedGame)
 				{
 					continue;
 				}
-				strncpy(player[i].name, skipselect[i], MAX_NAME_LEN);
+                int nlen = strlen(skipselect[i]+1);
+				strncpy(player[i].name, skipselect[i], nlen);
 
 				if (defaultselect)
 				{

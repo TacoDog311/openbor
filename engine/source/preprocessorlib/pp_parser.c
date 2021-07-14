@@ -714,7 +714,10 @@ HRESULT pp_parser_stringify(pp_parser *self)
             }
             else
             {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-truncation"
                 strncat(self->token.theSource, source, 1);
+#pragma GCC diagnostic pop
             }
 
             if(strlen(self->token.theSource) + 2 > MAX_TOKEN_LENGTH)
