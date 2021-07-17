@@ -25117,7 +25117,8 @@ int calculate_force_damage(entity *other, s_collision_attack *attack)
     int force = attack->attack_force;
     int type = attack->attack_type;
 
-    if(damagecheat && other->modeldata.type & TYPE_PLAYER)
+    //if(damagecheat && other->modeldata.type & TYPE_PLAYER)
+    if(damagecheat && self->modeldata.type & TYPE_ENEMY)
     {
         force = self->energy_state.health_current;
         attack->attack_drop = 1;
