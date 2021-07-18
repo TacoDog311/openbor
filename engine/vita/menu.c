@@ -175,7 +175,7 @@ static void sortList()
 static int findPaks(void)
 {
     int i = 0;
-    SceUID dp = NULL;
+    SceUID dp = 0;// NULL;
     SceIoDirent ds;
 
     dp = sceIoDopen(paksDir);
@@ -196,7 +196,7 @@ static int findPaks(void)
 					free(copy); copy = NULL;
             }
             memset(&filelist[i], 0, sizeof(fileliststruct));
-            strncpy(filelist[i].filename, ds.d_name, strlen(ds.d_name));
+            strcpy(filelist[i].filename, ds.d_name);
             i++;
         }
     }
@@ -368,7 +368,7 @@ static void drawMenu()
             shift = 0;
             colors = GRAY;
             listing[0] = '\0';
-            strncat(listing, filelist[list+dListScrollPosition].filename, sizeof(listing));
+            strcat(listing, filelist[list+dListScrollPosition].filename);
             extension = strrchr(listing, '.');
             if (extension) *extension = '\0';
 
