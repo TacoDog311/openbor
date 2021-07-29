@@ -562,6 +562,7 @@ int                 creditscheat        = 0;
 int                 healthcheat         = 0;
 int                 multihitcheat       = 0;					//Kratus (20-04-21) Flag to enable or disable the multihit glitch option
 int                 damagecheat         = 0;					//tacodog
+int                 weaponcheat         = 0;					//tacodog
 int                 showtimeover        = 0;
 int                 sameplayer          = 0;            		// 7-1-2005  flag to determine if players can use the same character
 int                 PLAYER_LIVES        = 3;					// 7-1-2005  default setting for Lives
@@ -25117,7 +25118,6 @@ int calculate_force_damage(entity *other, s_collision_attack *attack)
     int force = attack->attack_force;
     int type = attack->attack_type;
 
-    //if(damagecheat && other->modeldata.type & TYPE_PLAYER)
     if(damagecheat && self->modeldata.type & TYPE_ENEMY)
     {
         force = self->energy_state.health_current;
@@ -32142,7 +32142,7 @@ void dropweapon(int flag)
         {            
 			// If the flag is 2 or below, we subtract the flag's
 			// value from weapon counter.
-			if(flag < 2)
+			if(flag < 2 && !weaponcheat)
             {
                 self->weapent->modeldata.counter -= flag;
             }
@@ -39605,6 +39605,7 @@ void menu_options()
         HEALTH_CHEAT,
         MULTIHIT_CHEAT, // Kratus (20-04-21) add the multihit glitch option
         DAMAGE_CHEAT, // tacodog (21-07-11) infinite (9999) damage
+        WEAPON_CHEAT, // tacodog (21-07-11) infinite (9999) damage
 
         END_OPTION
     } e_selector;
@@ -39642,6 +39643,7 @@ void menu_options()
             _menutext((selector == HEALTH_CHEAT), OPT_X_POS, y_offset+cheat_opt_offset+HEALTH_CHEAT, (healthcheat)?Tr("Infinite Health On"):Tr("Infinite Health Off"));    // Enemies fall/don't down when you respawn
             _menutext((selector == MULTIHIT_CHEAT), OPT_X_POS, y_offset+cheat_opt_offset+MULTIHIT_CHEAT, (multihitcheat)?Tr("Multihit Glitch On"):Tr("Multihit Glitch Off"));    // Kratus (20-04-21) change the multihit glitch option on/off
             _menutext((selector == DAMAGE_CHEAT), OPT_X_POS, y_offset+cheat_opt_offset+DAMAGE_CHEAT, (damagecheat)?Tr("One hit kills On"):Tr("One hit kills Off"));    // tacodog (21-07-11)
+            _menutext((selector == WEAPON_CHEAT), OPT_X_POS, y_offset+cheat_opt_offset+WEAPON_CHEAT, (weaponcheat)?Tr("Inf Weapons On"):Tr("Inf Weapons Off"));    // tacodog (21-07-11)
         }
 
         _menutextm((selector == BACK_OPTION), y_offset+cheat_opt_offset+BACK_OPTION+2, 0, Tr("Back"));
@@ -39712,6 +39714,7 @@ void menu_options()
            else if(selector==HEALTH_CHEAT) healthcheat = !healthcheat;
            else if(selector==MULTIHIT_CHEAT) multihitcheat = !multihitcheat; // Kratus (20-04-21) selector for the multihit glitch option
            else if(selector==DAMAGE_CHEAT) damagecheat = !damagecheat; // tacodog
+           else if(selector==WEAPON_CHEAT) weaponcheat = !weaponcheat; // tacodog
            else quit = 1;
         }
     }
