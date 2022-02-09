@@ -12634,7 +12634,7 @@ int load_models()
                 break;
             case CMD_MODELSTXT_NOCHEATS:
                 //disable cheat option in menu
-                forcecheatsoff =  GET_INT_ARG(1);
+                //forcecheatsoff =  GET_INT_ARG(1);
                 break;
             case CMD_MODELSTXT_NODEBUG:
                 //disable debug option in menu
@@ -12674,14 +12674,14 @@ int load_models()
                 // Number of points needed to earn a 1-up
                 credscore =  GET_INT_ARG(1);
                 break;
-            case CMD_MODELSTXT_VERSUSDAMAGE:
-                // Number of points needed to earn a credit
-                versusdamage =  GET_INT_ARG(1);
-                if(versusdamage == 0 || versusdamage == 1)
-                {
-                    savedata.mode = versusdamage ^ 1;
-                }
-                break;
+            //case CMD_MODELSTXT_VERSUSDAMAGE:
+            //    // Number of points needed to earn a credit
+            //    versusdamage =  GET_INT_ARG(1);
+            //    if(versusdamage == 0 || versusdamage == 1)
+            //    {
+            //        savedata.mode = versusdamage ^ 1;
+            //    }
+            //    break;
             case CMD_MODELSTXT_DROPV:
                 default_model_dropv.y =  GET_FLOAT_ARG(1);
                 default_model_dropv.x =  GET_FLOAT_ARG(2);
